@@ -20,6 +20,27 @@ def get_ticks():
     
     return hours_init,hours_dest
 
+def time(h:int,m:int,s:int):
+    hour=""
+    minute=""
+    second=""
+    
+    if(h<10):
+        hour="0{}".format(int(h))
+    else:
+        hour="{}".format(int(h))
+    if(m<10):
+        minute="0{}".format(int(m))
+    else:
+        minute="{}".format(int(m))
+    if(s<10):
+        second="0{}".format(int(s))
+    else:
+        second="{}".format(int(s))
+    timeStr=hour+":"+minute+":"+second
+
+    return timeStr
+
 def get_time(Canvas):
     time_now=datetime.datetime.now().time()
     hour=math.fmod(time_now.hour,12)
@@ -44,5 +65,6 @@ def get_time(Canvas):
     cv2.line(Canvas,CENTER,(hour_x,hour_y),COLORS.get("amber"),7)
 
     cv2.circle(Canvas,CENTER,5,COLORS.get("black"),-2)
-
+    timeStr=time(hour,minute,second)
+    cv2.putText(Canvas,timeStr,(215,390),cv2.FONT_HERSHEY_COMPLEX,1.6,COLORS.get("red"),3)
     return Canvas
